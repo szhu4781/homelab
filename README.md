@@ -1,6 +1,6 @@
 # Home Lab Setup on WSL2
 ## Author: Shengwei Zhu
----
+
 A self-hosted home lab running on Windows Subsystem for Linux (WSL2) featuring DNS filtering, reverse proxying, monitoring, cloud storage, and VPN.
 
 ## Prerequisites
