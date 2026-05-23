@@ -3,6 +3,12 @@
 ---
 A self-hosted home lab running on Windows Subsystem for Linux (WSL2) featuring DNS filtering, reverse proxying, monitoring, cloud storage, and VPN.
 
+## Prerequisites
+- Windows 10/11 with WSL2 enabled
+- WSL installed on your Windows system
+- Ubuntu 24.04 LTS or similar installed (I installed mine from the Microsoft Store)
+- Personal network since router access is required for DNS
+
 ## Stack
 | Service | Purpose | URL |
 |---|---|---|
@@ -13,3 +19,23 @@ A self-hosted home lab running on Windows Subsystem for Linux (WSL2) featuring D
 | Nextcloud | Personal cloud storage | `http://nextcloud.home:8081` |
 | Wireguard | VPN server | Port 51820 |
 
+## Architecture
+Windows Host
+└── WSL2 (Ubuntu 24.04)
+├── Pi-hole (DNS + Web UI :80)
+├── Nginx (Reverse Proxy :8080)
+├── Prometheus (Metrics :9090)
+├── Grafana (Dashboard :3000)
+├── Apache2 + Nextcloud (Cloud :8081)
+├── MariaDB (Database)
+└── Wireguard (VPN :51820)
+
+## Automation
+A boot script (`scripts/update-wsl-ip.sh`) runs on every WSL launch and:
+- Updates the Windows hosts file with the current WSL IP
+- Sets Windows DNS to point to Pi-hole
+- Starts all services automatically
+
+## Note
+- Replace all placeholder values in configs before use
+- Database credentials should be changed from defaults
