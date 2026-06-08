@@ -19,6 +19,19 @@ A self-hosted home lab running on Windows Subsystem for Linux (WSL2) featuring D
 | Nextcloud | Personal cloud storage | `http://nextcloud.home:8081` |
 | Wireguard | VPN server | Port 51820 |
 
+## Architecture
+```
+Windows Host
+└── WSL2 (Ubuntu 24.04)
+├── Pi-hole (DNS + Web UI :80)
+├── Nginx (Reverse Proxy :8080)
+├── Prometheus (Metrics :9090)
+├── Grafana (Dashboard :3000)
+├── Apache2 + Nextcloud (Cloud :8081)
+├── MariaDB (Database)
+└── Wireguard (VPN :51820)
+```
+
 ## Automation
 A boot script (`scripts/update-wsl-ip.sh`) runs on every WSL launch and:
 - Updates the Windows hosts file with the current WSL IP
