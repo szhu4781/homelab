@@ -3,7 +3,7 @@
 
 A self-hosted home lab running on Windows Subsystem for Linux (WSL2) featuring DNS filtering, reverse proxying, monitoring, cloud storage, and VPN.
 
-## Prerequisites
+## Requirements and Environment
 - Windows 10/11 with WSL2 enabled
 - WSL installed on your Windows system
 - Ubuntu 24.04 LTS or similar installed (I installed mine from the Microsoft Store)
