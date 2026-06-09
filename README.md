@@ -42,4 +42,9 @@ A boot script (`scripts/update-wsl-ip.sh`) runs on every WSL launch and:
 - Replace all placeholder values in configs before use
 - Database credentials should be changed from defaults
 
-
+## Resouces
+- [Pi-hole](https://github.com/pi-hole/docs)
+- [Nginx Guide](https://nginx.org/en/docs/beginners_guide.html)
+- [Grafana and Prometheus](https://grafana.com/docs/grafana/latest/fundamentals/getting-started/first-dashboards/get-started-grafana-prometheus/)
+- [Wireguard Quick Start](https://www.wireguard.com/quickstart/)
+- [Nextcloud User Manual](https://docs.nextcloud.com/server/stable/user_manual/en/)
