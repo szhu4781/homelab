@@ -19,7 +19,7 @@ sudo ln -s /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 sudo systemctl enable systemd-resolved
 sudo systemctl start systemd-resolved
 ```
-Also remove your `<WSL_UP>` from Windows Wi-Fi DNS settings.
+Also remove your `<WSL_IP>` from Windows Wi-Fi DNS settings.
 
 ---
 
