@@ -2,6 +2,7 @@
 ## 2026-06-09
 - Added a new **Resouces** section
 - Updated README.md with useful links and resources
+- Added rollback.md in docs folder as a Rollback plan for each service installed
 
 ## 2026-06-08
 - Changelog has officially been made
