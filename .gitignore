@@ -1,0 +1,27 @@
+# Private keys
+*.key
+*.pem
+*.crt
+
+# Wireguard client configs
+configs/wireguard/client.conf
+configs/wireguard/client-private.key
+configs/wireguard/client-public.key
+
+# Database files
+*.sql
+*.db
+*.db-shm
+*.db-wal
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+*.swp
+*.swo
