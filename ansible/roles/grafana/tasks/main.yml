@@ -1,0 +1,36 @@
+---
+- name: Install Grafana
+  apt:
+    name: 
+      - apt-transport-https
+      - software-properties-common
+    state: present
+
+- name: Create keyrings directory
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+
+- name: Add Grafana GPG key
+  shell: wget -q -O - https://apt.grafana.com/gpg.key | gpg dearmor -o /etc/apt/keyrings/grafana.gpg
+  args:
+    creates: /etc/apt/keyrings/grafana.gpg
+
+- name: Add Grafana repository
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main"
+    state: present
+    filename: grafana
+
+- name: Install Grafana
+  apt:
+    name: grafana
+    state: present
+    update_cache: yes
+
+- name: Start Grafana
+  service:
+    name: grafana-server
+    state: started
+    enabled: yes

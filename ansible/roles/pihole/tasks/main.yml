@@ -1,0 +1,36 @@
+---
+- name: Disable systemd-resolved
+  systemd:
+    name: systemd-resolved
+    state: stopped
+    enabled: no
+
+- name: Set static DNS resolv.conf
+  copy:
+    content: "nameserver 8.8.8.8\n"
+    dest: /etc/resolv.conf
+    force: yes
+
+- name: Clone Pi-hole installer
+  git:
+    repo: https://github.com/pi-hole/pi-hole.git
+    dest: /tmp/pihole
+    depth: 1
+
+- name: Run Pi-hole installer
+  shell: bash /tmp/pihole/automated\ install/basic-install.sh --unattended
+  args:
+    creates: /usr/local/bin/pihole
+
+- name: Stop lighttpd if running
+  service:
+    name: lighttpd
+    state: stopped
+    enabled: no
+  ignore_errors: yes
+
+- name: Start pihole-FTL
+  service:
+    name: pihole-FTL
+    state: started
+    enabled: yes

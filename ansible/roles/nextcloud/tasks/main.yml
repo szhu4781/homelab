@@ -1,0 +1,85 @@
+---
+- name: Install Apache2 and PHP dependencies
+  apt:
+    name:
+      - apache2
+      - mariadb-server
+      - libapache2-mod-php
+      - php-gd
+      - php-mysql
+      - php-curl
+      - php-mbstring
+      - php-intl
+      - php-gmp
+      - php-bcmath
+      - php-xml
+      - php-imagick
+      - php-zip
+      - php-bz2
+      - unzip
+    state: present
+
+- name: Start MariaDB
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+
+- name: Create Nextcloud database
+  mysql_db:
+    name: nextcloud
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create Nextcloud DB user
+  mysql_user:
+    name: nextcloud
+    password: "{{ nextcloud_db_password }}"
+    priv: "nextcloud.*:ALL"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Download Nextcloud
+  get_url:
+    url: https://download.nextcloud.com/server/releases/latest.zip
+    dest: /tmp/nextcloud.zip
+
+- name: Extract Nextcloud
+  unarchive:
+    src: /tmp/nextcloud.zip
+    dest: /var/www/
+    remote_src: yes
+    creates: /var/www/nextcloud
+
+- name: Set Nextcloud permissions
+  file:
+    path: /var/www/nextcloud
+    owner: www-data
+    group: www-data
+    recurse: yes
+
+- name: Copy Apache Nextcloud config
+  copy:
+    src: nextcloud.conf
+    dest: /etc/apache2/sites-available/nextcloud.conf
+  notify: restart apache2
+
+- name: Copy Apache ports config
+  copy:
+    src: ports.conf
+    dest: /etc/apache2/ports.conf
+  notify: restart apache2
+
+- name: Enable Nextcloud site
+  shell: a2ensite nextcloud.conf
+  notify: restart apache2
+
+- name: Enable Apache modules
+  shell: a2enmod rewrite headers env dir mime
+  notify: restart apache2
+
+- name: Start Apache2
+  service:
+    name: apache2
+    state: started
+    enabled: yes

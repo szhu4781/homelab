@@ -1,0 +1,34 @@
+---
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Remove default index.html
+  file:
+    path: /var/www/html/index.html
+    state: absent
+
+- name: Disable default site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Copy Pi-hole proxy config
+  copy:
+    src: pihole.conf
+    dest: /etc/nginx/sites-available/pihole
+  notify: reload nginx
+
+- name: Enable Pi-hole proxy site
+  file:
+    src: /etc/nginx/sites-available/pihole
+    dest: /etc/nginx/sites-enabled/pihole
+    state: link
+  notify: reload nginx
+
+- name: Start Nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes

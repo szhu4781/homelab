@@ -1,0 +1,15 @@
+---
+- name: Configure Home Lab
+  hosts: homelab
+  become: yes
+  vars_files:
+    - vars.yml
+
+  roles:
+    - common
+    - pihole
+    - nginx
+    - grafana
+    - nextcloud
+    - prometheus
+    - wireguard

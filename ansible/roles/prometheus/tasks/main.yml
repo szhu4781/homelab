@@ -1,0 +1,11 @@
+---
+- name: Install Prometheus
+  apt:
+    name: prometheus
+    state: present
+
+- name: Start Prometheus
+  service:
+    name: prometheus
+    state: started
+    enabled: yes
