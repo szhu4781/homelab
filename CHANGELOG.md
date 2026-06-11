@@ -1,4 +1,9 @@
 # Changelog
+## 2026-06-10
+- Adjusted colors of the architecture diagram to make it more visible
+- Added Ansible playbook and scripts for deployment
+- Restored repository files after they were accidently overwritten by `git pull force`
+
 ## 2026-06-09
 - Added a new **Resouces** section
 - Updated README.md with useful links and resources
