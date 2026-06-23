@@ -1,0 +1,8 @@
+Add-ADGroupMember -Identity "IT-Staff" -Members "jdavis","dmartinez","jelliot"
+Add-ADGroupMember -Identity "IT-Admin" -Members "jdavis"
+Add-ADGroupMember -Identity "HR-Staff" -Members "lnguyen","jcalvin","lsmith"
+Add-ADGroupMember -Identity "Finance-Staff" -Members "kwilliams","rbrown","clee"
+Add-ADGroupMember -Identity "Marketing-Staff" -Members "jwang","alee","tjones"
+Add-ADGroupMember -Identity "Operations-Staff" -Members "tanderson","jknight","slo","kmccathy"
+Add-ADGroupMember -Identity "Sales-Staff" -Members "dkim","rfox","janderson","sbright"
+Add-ADGroupMember -Identity "Executive-Staff" -Members "szhu","ewagner","jkwon","ajohnson","lwilliams","agarcia"
