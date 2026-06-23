@@ -1,8 +1,6 @@
 # Home Lab Setup on WSL2
 ## Author: Shengwei Zhu
 
-A personal home lab environment split across two platforms: a WSL2-based infrastructure stack on my Windows laptop, and a Proxmox virtualization environment on a dedicated Beelink mini PC.
-
 ## Projects
 ### WSL2 Infrastructure Lab
 A self-hosted stack running on Windows Subsystem for Linux (WSL2) featuring DNS filtering, reverse proxying, monitoring, cloud storage, and VPN.
@@ -81,9 +79,9 @@ Windows Security Event Logs
 
 #### Automation
 Active Directory provisioning automated via PowerShell scripts:
-- `proxmox-lab/scripts/create-ous.ps1` — OU structure
-- `proxmox-lab/scripts/create-users.ps1` — user accounts
-- `proxmox-lab/scripts/create-groups.ps1` — security groups and membership
+- `proxmox-lab/scripts/create-ous.ps1` - OU structure
+- `proxmox-lab/scripts/create-users.ps1` - user accounts
+- `proxmox-lab/scripts/create-groups.ps1` - security groups and membership
 ---
 ## Architecture
 ![App Screenshot](architecture.png)
