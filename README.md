@@ -79,9 +79,10 @@ Windows Security Event Logs
 
 #### Automation
 Active Directory provisioning automated via PowerShell scripts:
-- `proxmox-lab/scripts/create-ous.ps1` - OU structure
+- `proxmox-lab/scripts/create-ou.ps1` - OU structure
 - `proxmox-lab/scripts/create-users.ps1` - user accounts
 - `proxmox-lab/scripts/create-groups.ps1` - security groups and membership
+- `proxmox-lab/scripts/add-users2groups.ps1` - Adds users to the specific groups
 ---
 ## Architecture
 ![App Screenshot](architecture.png)
