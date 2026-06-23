@@ -84,7 +84,7 @@ Active Directory provisioning automated via PowerShell scripts:
 - `proxmox-lab/scripts/create-groups.ps1` - security groups and membership
 ---
 ## Architecture
-![App Screenshot]()
+![App Screenshot](architecture.png)
 
 ### Note
 - Replace all placeholder values in configs before use
