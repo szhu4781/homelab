@@ -1,3 +1,4 @@
+# Replace the "szhu" and "lab" with the name and extension of your domain
 # Users in the Executive Department
 
 # CEO
