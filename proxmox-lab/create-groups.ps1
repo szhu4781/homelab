@@ -1,4 +1,4 @@
-# Replace the szhu and lab values with the name and extension of your domain
+# Replace the "szhu" and "lab" values with the name and extension of your domain
 New-ADGroup -Name "IT-Staff" -GroupScope Global -GroupCategory Security -Path "OU=IT,DC=szhu,DC=lab"
 New-ADGroup -Name "HR-Staff" -GroupScope Global -GroupCategory Security -Path "OU=HR,DC=szhu,DC=lab"
 New-ADGroup -Name "Finance-Staff" -GroupScope Global -GroupCategory Security -Path "OU=Finance,DC=szhu,DC=lab"
