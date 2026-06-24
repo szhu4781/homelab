@@ -4,7 +4,7 @@ This guide contains a step-by-step deployment of a resource-optimized, secure El
 ## Stack
 * **Elastic Host VM:** Ubuntu Server 24.04 LTS (4GB RAM, 2 Cores)
 * **Telemetry Source:** Windows Server 2022 Domain Controller (DC) VM
-* **Log Pipeline:** Windows Security Event Logs ➔ Winlogbeat ➔ Elasticsearch (Port 9200) ➔ Kibana (Port 5601)
+* **Log Pipeline:** Windows Security Event Logs -> Winlogbeat -> Elasticsearch (Port 9200) -> Kibana (Port 5601)
 
 ### 1. Optimize Linux Kernel Memory
 Elasticsearch requires a memory map count that exceeds Linux defaults. Increase this limit permanently on the Ubuntu VM:
