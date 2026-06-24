@@ -72,7 +72,6 @@ Once the database node is online, execute the native credential utility to gener
 sudo docker compose exec elasticsearch bin/elasticsearch-setup-passwords interactive
 ```
 **Note: Record all generated keys. The `kibana_system` password must be updated inside the `docker-compose.yml` file before launching the frontend web container using `sudo docker compose up -d`.**
----
 
 ### 4. GPO Advanced Audit Configuration
 By default, Windows Server silences specific authentication failure metadata. Enforce auditing parameters natively via Group Policy:
