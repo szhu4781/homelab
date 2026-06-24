@@ -1,4 +1,4 @@
-# Home Lab Setup on WSL2
+# Computer Networking & Enterprise Security Home Lab
 ## Author: Shengwei Zhu
 
 ## Projects
@@ -40,17 +40,17 @@ A dedicated home lab server running Proxmox VE on a Beelink Mini S13 mini PC, ho
 #### Stack
 | Service | Purpose | Host |
 |---|---|---|
-| Windows Server 2022 | Domain Controller | VM · 10.0.0.201 |
+| Windows Server 2022 | Domain Controller | VM - 10.0.0.201 |
 | Active Directory DS | User/group/OU management | Windows Server VM |
 | DNS Server | Domain name resolution | Windows Server VM |
 | GPOs | Security policy enforcement | Windows Server VM |
 | Winlogbeat | Log shipping agent | Windows Server VM |
-| Windows 10 | Domain-joined client | VM · 10.0.0.60 |
-| Elasticsearch | SIEM log storage | Ubuntu VM · Docker |
-| Kibana | Dashboards & alerting | Ubuntu VM · Docker |
-| Nextcloud | Personal cloud storage | Ubuntu VM · :8081 |
-| MariaDB | Nextcloud database | Ubuntu VM · :3306 |
-| Apache2 | Web server for Nextcloud | Ubuntu VM · :8081 |
+| Windows 10 | Domain-joined client | VM - 10.0.0.60 |
+| Elasticsearch | SIEM log storage | Ubuntu VM w/ Docker compose |
+| Kibana | Dashboards & alerting | Ubuntu VM w/ Docker compose |
+| Nextcloud | Personal cloud storage | Ubuntu VM - :8081 |
+| MariaDB | Nextcloud database | Ubuntu VM - :3306 |
+| Apache2 | Web server for Nextcloud | Ubuntu VM - :8081 |
 
 #### Active Directory Structure
 - 7 Organizational Units: Executive, IT, HR, Finance, Marketing, Operations, Sales
