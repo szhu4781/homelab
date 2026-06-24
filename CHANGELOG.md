@@ -1,4 +1,9 @@
 # Changelog
+## 2026-06-23
+- Documentation for Proxmox Lab and Elastic setup has been added to /proxmox-lab. See **proxmox-lab/docs** for /docs/setup.md and /doc/elastic-setup.md
+- Fixed some formatting issues in README.md
+- Included the docker-compose.yml file in /proxmox-lab/scripts
+
 ## 2026-06-22
 - Updated README.md with details on expanding homelab and installing Proxmox VE on mini PC for server hosting
 - Added a dedicated **Projects** section to split WSL2 homelab and Proxmox VE lab apart
@@ -6,7 +11,7 @@
 - Updated architecture diagram to include Proxmox VE host
 - Added a new folder **/proxmox-lab** to store documentation and scripts for the Proxmox VE lab
 - Added PowerShell scripts that were used in the lab for setting up organizational units (OU), users and groups on the domain controller (DC) VM in Proxmox
-- _Documentation for Proxmox lab and Elastic setup will be added soon, I spent 12 hours on setting everything up including GPOs and I need some rest._
+- _Documentation for Proxmox lab and Elastic setup will be added soon, I spent 2 days on setting everything up including GPOs and I need some rest._
 
 ## 2026-06-10
 - Adjusted colors of the architecture diagram to make it more visible
