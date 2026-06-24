@@ -84,13 +84,16 @@
 Run scripts from `proxmox-lab/scripts/` on the Domain Controller:
 ```
 # Create OUs
-.\create-ous.ps1
+.\create-ou.ps1
 
 # Create users
 .\create-users.ps1
 
 # Create groups and add members
 .\create-groups.ps1
+
+# Add users to groups
+.\add-user2groups.ps1
 ```
 See `proxmox-lab/docs/gpo-list.md` for GPO configuration details.
 **Note: Copy-and-paste from host to VM is not enabled by default for noVNC, which is typically used for Proxmox VM consoles. There are ways to get that set up like changing the graphics display to SPICE or installing guest tools for QEMU, but I won't be including steps for setting those up here.**
