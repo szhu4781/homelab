@@ -1,6 +1,8 @@
 # Computer Networking & Enterprise Security Home Lab
 ## Author: Shengwei Zhu
 
+*Please refer to the changelog in CHANGELOG.md for the latest updates.*
+
 ## Projects
 ### WSL2 Infrastructure Lab
 A self-hosted stack running on Windows Subsystem for Linux (WSL2) featuring DNS filtering, reverse proxying, monitoring, cloud storage, and VPN.
