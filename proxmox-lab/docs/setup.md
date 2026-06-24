@@ -10,7 +10,7 @@
 - USB keyboard and HDMI display for initial Proxmox install only
 ---
 
-## 1: Install Proxmox VE
+## 1. Install Proxmox VE
 1. Boot the mini PC from the Proxmox USB installer (spam F7 on Beelink to get boot menu)
 2. Select **Install Proxmox VE (Graphical)**
 3. Accept the EULA
@@ -26,7 +26,7 @@
 9. Access the web UI on your browser at `https://10.0.0.200:8006`
 **Note: The URL address will be different depending on what you set your IP address to during installation.**
 
-## 2: Upload ISOs to Proxmox
+## 2. Upload ISOs to Proxmox
 1. Log into Proxmox web UI
 2. Go to **Datacenter > proxmox > local storage > ISO Images**
 3. Upload:
@@ -35,7 +35,7 @@
    - Ubuntu Server 24.04 LTS ISO
    - virtio-win ISO
 
-## 3: Create Windows Server 2022 VM (Domain Controller)
+## 3. Create Windows Server 2022 VM (Domain Controller)
 ### VM Settings
 | Setting | Value |
 |---|---|
@@ -58,7 +58,7 @@
 - Run `virtio-win-guest-tools.exe` from the VirtIO CD after install
 - Activate with your Windows Server Datacenter product key when prompte
 
-## 4: Configure Static IP on Windows Server
+## 4. Configure Static IP on Windows Server
 1. Open **Network & Internet Settings > Change adapter options**
 2. Right-click adapter > **Properties > IPv4 > Properties**
 3. Set:
@@ -68,7 +68,7 @@
    - DNS: `127.0.0.1` (points to itself after AD DS promotion)
 4. Disable IPv6 on the adapter to avoid DNS conflicts
 
-## 5: Install Active Directory Domain Services
+## 5. Install Active Directory Domain Services
 1. Open **Server Manager → Add Roles and Features**
 2. Select **Active Directory Domain Services** and **DNS Server**
 3. Complete installation
@@ -80,7 +80,7 @@
 9. Complete promotion and reboot
 **Note: You can choose whatever name you want for domain. Examples of name extension includes but not limited to: .local, .home, lab, .corp, etc.**
 
-## 6: Provision Active Directory via PowerShell
+## 6. Provision Active Directory via PowerShell
 Run scripts from `proxmox-lab/scripts/` on the Domain Controller:
 ```
 # Create OUs
@@ -95,7 +95,7 @@ Run scripts from `proxmox-lab/scripts/` on the Domain Controller:
 See `proxmox-lab/docs/gpo-list.md` for GPO configuration details.
 **Note: Copy-and-paste from host to VM is not enabled by default for noVNC, which is typically used for Proxmox VM consoles. There are ways to get that set up like changing the graphics display to SPICE or installing guest tools for QEMU, but I won't be including steps for setting those up here.**
 
-## 7: Create Windows 10 Client VM
+## 7. Create Windows 10 Client VM
 ### VM Settings
 | Setting | Value |
 |---|---|
@@ -119,7 +119,7 @@ See `proxmox-lab/docs/gpo-list.md` for GPO configuration details.
 5. Authenticate with domain admin credentials
 6. Reboot the VM
 
-## 8: Create Ubuntu Server VM (Nextcloud + SIEM)
+## 8. Create Ubuntu Server VM (Nextcloud + SIEM)
 ### VM Settings
 | Setting | Value |
 |---|---|
@@ -137,14 +137,13 @@ See `proxmox-lab/docs/gpo-list.md` for GPO configuration details.
 - Enable OpenSSH during Ubuntu Server install
 - SSH in from your computer after install: `ssh username@<UBUNTU_SERVER_IP>`
 - Clone Github repo and run Ansible playbook for Nextcloud:
-
 ```
 git clone https://github.com/szhu4781/homelab.git
 cd homelab/ansible
 ansible-playbook -i inventory.ini homelab.yml --tags "common,nextcloud"
 ```
 
-## 9: Deploy Elasticsearch and Kibana (Docker)
+## 9. Deploy Elasticsearch and Kibana (Docker)
 ### Install Docker
 ```
 sudo apt install docker.io docker-compose -y
