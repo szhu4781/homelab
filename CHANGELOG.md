@@ -1,8 +1,9 @@
 # Changelog
 ## 2026-06-23
-- Documentation for Proxmox Lab and Elastic setup has been added to /proxmox-lab. See **proxmox-lab/docs** for /docs/setup.md and /doc/elastic-setup.md
+- Documentation for Proxmox Lab and Elastic setup has been added to /proxmox-lab. See **proxmox-lab/docs** for proxmox-lab/docs/setup.md and proxmox-lab/doc/elastic-setup.md
 - Fixed some formatting issues in README.md
 - Included the docker-compose.yml file in /proxmox-lab/scripts
+- Included list of GPOs that were setup in domain controller VM. See /proxmox-lab/docs/gpo-list.md.
 
 ## 2026-06-22
 - Updated README.md with details on expanding homelab and installing Proxmox VE on mini PC for server hosting
