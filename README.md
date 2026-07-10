@@ -17,7 +17,7 @@ A self-hosted stack running on Windows Subsystem for Linux (WSL2) featuring DNS 
 | Service | Purpose | URL |
 |---|---|---|
 | Pi-hole | DNS filtering & ad blocking | `http://pihole.home/admin` |
-| Nginx | Reverse proxy | `http://172.22.71.14:8080` |
+| Nginx | Reverse proxy | `https://pihole.home:8443` |
 | Prometheus | Metrics collection | `localhost:9090` |
 | Grafana | Monitoring dashboard | `http://grafana.home:3000` |
 | Nextcloud | Personal cloud storage | `http://nextcloud.home:8081` |
