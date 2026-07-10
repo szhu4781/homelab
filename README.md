@@ -16,10 +16,10 @@ A self-hosted stack running on Windows Subsystem for Linux (WSL2) featuring DNS 
 #### Stack
 | Service | Purpose | URL |
 |---|---|---|
-| Pi-hole | DNS filtering & ad blocking | `http://pihole.home/admin` |
+| Pi-hole | DNS filtering & ad blocking | `https://pihole.home:8443/admin` |
 | Nginx | Reverse proxy | `https://pihole.home:8443` |
 | Prometheus | Metrics collection | `localhost:9090` |
-| Grafana | Monitoring dashboard | `http://grafana.home:3000` |
+| Grafana | Monitoring dashboard | `https://grafana.home:3443` |
 | Nextcloud | Personal cloud storage | `http://nextcloud.home:8081` |
 | Wireguard | VPN server | Port 51820 |
 
