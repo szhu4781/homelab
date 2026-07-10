@@ -1,6 +1,14 @@
 # Changelog
+## 2026-07-10
+- Updated documentation for WSL setup to include instructions for setting up mkcert and HTTPS for Pihole and Grafana
+- The updated configuration files for setting up HTTPS on Pihole and Grafana have also been updated. See **/configs/nginx/grafana.conf and /configs/nginx/pihole.conf**
+- Updated the Pihole and Grafana ports and protocols after setting up mkcert in README.md
+- Added GLPI to the stack
+- Updated architecture diagram to includ GLPI
+- Added setup guide for GLPI in **/proxmox-lab/docs/glpi-setup.md**
+
 ## 2026-06-23
-- Documentation for Proxmox Lab and Elastic setup has been added to /proxmox-lab. See **proxmox-lab/docs** for proxmox-lab/docs/setup.md and proxmox-lab/doc/elastic-setup.md
+- Documentation for Proxmox Lab and Elastic setup has been added to /proxmox-lab. See **/proxmox-lab/docs** for /proxmox-lab/docs/setup.md and proxmox-lab/doc/elastic-setup.md
 - Fixed some formatting issues in README.md
 - Included the docker-compose.yml file in /proxmox-lab/scripts
 - Included list of GPOs that were setup in domain controller VM. See /proxmox-lab/docs/gpo-list.md.
