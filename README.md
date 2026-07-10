@@ -53,6 +53,7 @@ A dedicated home lab server running Proxmox VE on a Beelink Mini S13 mini PC, ho
 | Nextcloud | Personal cloud storage | Ubuntu VM - :8081 |
 | MariaDB | Nextcloud database | Ubuntu VM - :3306 |
 | Apache2 | Web server for Nextcloud | Ubuntu VM - :8081 |
+| GLPI | IT Service Management | Ubuntu VM - :8082 |
 
 #### Active Directory Structure
 - 7 Organizational Units: Executive, IT, HR, Finance, Marketing, Operations, Sales
