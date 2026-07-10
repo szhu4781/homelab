@@ -7,13 +7,13 @@
 
 ## 1. Initial WSL Setup
 Open Ubuntu terminal and update packages:
-```bash
+```
 sudo apt update && sudo apt upgrade -y
 ```
 
 ## 2. Fix Port 53 for Pi-hole
 Disable systemd-resolved so Pi-hole can use port 53:
-```bash
+```
 sudo systemctl stop systemd-resolved
 sudo systemctl disable systemd-resolved
 sudo rm /etc/resolv.conf
@@ -21,7 +21,7 @@ echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
 ```
 
 ## 3. Install Pi-hole
-```bash
+```
 git clone --depth 1 https://github.com/pi-hole/pi-hole.git /tmp/pihole
 cd /tmp/pihole/automated\ install/
 sudo bash basic-install.sh
@@ -35,18 +35,18 @@ Installer settings:
 - Privacy mode: Show everything
 
 After install, stop lighttpd and start pihole-FTL:
-```bash
+```
 sudo service lighttpd stop
 sudo service pihole-FTL restart
 ```
 
 Set a new admin password:
-```bash
+```
 sudo pihole setpassword
 ```
 
 ## 4. Install Nginx
-```bash
+```
 sudo apt install nginx -y
 ```
 Change default port to 8080 in `/etc/nginx/sites-available/default`:
@@ -56,13 +56,13 @@ listen [::]:8080 default_server;
 ```
 
 Disable default site and create Pi-hole proxy:
-```bash
+```
 sudo unlink /etc/nginx/sites-enabled/default
 sudo nano /etc/nginx/sites-available/pihole
 ```
 
-Paste:
-```nginx
+Nginx:
+```
 server {
     listen 8080;
     server_name pihole.home;
@@ -77,19 +77,18 @@ server {
 ```
 
 Enable and reload:
-```bash
+```
 sudo ln -s /etc/nginx/sites-available/pihole /etc/nginx/sites-enabled/
 sudo service nginx start
 ```
 
 ## 5. Install Prometheus and Grafana
-
-```bash
+```
 sudo apt install prometheus -y
 ```
 
 Add Grafana repository and install:
-```bash
+```
 sudo apt install -y apt-transport-https software-properties-common
 sudo mkdir -p /etc/apt/keyrings
 wget -q -O - https://apt.grafana.com/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/grafana.gpg
@@ -104,19 +103,19 @@ In Grafana (`http://<WSL_IP>:3000`):
 - Import dashboard ID `1860` (Node Exporter Full)
 
 ## 6. Install Nextcloud
-
 Install dependencies:
-```bash
+```
 sudo apt install -y apache2 mariadb-server libapache2-mod-php php-gd php-mysql php-curl php-mbstring php-intl php-gmp php-bcmath php-xml php-imagick php-zip php-bz2
 ```
 
 Set up database:
-```bash
+```
 sudo service mariadb start
 sudo mysql -u root
 ```
 
-```sql
+SQL:
+```
 CREATE DATABASE nextcloud;
 CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY 'your_password';
 GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost';
@@ -125,7 +124,7 @@ EXIT;
 ```
 
 Download and install Nextcloud:
-```bash
+```
 cd /tmp
 wget https://download.nextcloud.com/server/releases/latest.zip
 sudo apt install unzip -y
@@ -134,12 +133,12 @@ sudo chown -R www-data:www-data /var/www/nextcloud
 ```
 
 Configure Apache:
-```bash
+```
 sudo nano /etc/apache2/sites-available/nextcloud.conf
 ```
 
-Paste:
-```apache
+Apache:
+```
 <VirtualHost *:8081>
     DocumentRoot /var/www/nextcloud
     ServerName nextcloud.home
@@ -153,7 +152,7 @@ Paste:
 ```
 
 Enable site and modules:
-```bash
+```
 sudo a2ensite nextcloud.conf
 sudo a2enmod rewrite headers env dir mime
 sudo nano /etc/apache2/ports.conf  # Change Listen 80 to Listen 8081
@@ -161,19 +160,18 @@ sudo service apache2 restart
 ```
 
 ## 7. Install Wireguard
-
-```bash
+```
 sudo apt install wireguard iptables -y
 ```
 
 Generate server keys:
-```bash
+```
 wg genkey | sudo tee /etc/wireguard/private.key | wg pubkey | sudo tee /etc/wireguard/public.key
 sudo chmod 600 /etc/wireguard/private.key
 ```
 
 Create server config at `/etc/wireguard/wg0.conf`:
-```ini
+```
 [Interface]
 Address = 10.0.0.1/24
 ListenPort = 51820
@@ -188,28 +186,27 @@ AllowedIPs = 10.0.0.2/32
 ```
 
 Enable IP forwarding and start:
-```bash
+```
 echo "net.ipv4.ip_forward=1" | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
 sudo wg-quick up wg0
 ```
 
 ## 8. Boot Automation
-
 Create the update script:
-```bash
+```
 sudo nano /usr/local/bin/update-wsl-ip.sh
 ```
 
-See `scripts/update-wsl-ip.sh` in this repository.
+See `scripts/update-wsl-ip.sh`.
 
 Make it executable:
-```bash
+```
 sudo chmod +x /usr/local/bin/update-wsl-ip.sh
 ```
 
 Add to `/etc/wsl.conf`:
-```ini
+```
 [boot]
 systemd=true
 command="/usr/local/bin/update-wsl-ip.sh && service pihole-FTL start && service nginx start && service prometheus start && service grafana-server start && service mariadb start && service apache2 start && wg-quick up wg0"
@@ -219,8 +216,38 @@ default=<your_username>
 ```
 
 ## 9. Windows DNS
-
-Set your Wi-Fi DNS to your WSL IP:
+Set Wi-Fi DNS to your WSL IP:
 - Go to Wi-Fi Properties → IPv4 → DNS
 - Preferred: `<WSL_IP>`
 - Alternate: `8.8.8.8`
+
+## 10. HTTPS Setup with mkcert
+### Install mkcert on Windows
+1. Download mkcert from https://github.com/FiloSottile/mkcert/releases
+2. Place mkcert.exe in C:\Windows\System32
+3. Run as Administrator: `mkcert -install`
+
+### Generate Certificates
+```
+mkcert pihole.home grafana.home nextcloud.home "*.home"
+```
+
+### Copy to WSL
+```
+copy "C:\Windows\system32\pihole.home+3.pem" "C:\Users\<username>\Desktop\homelab.crt"
+copy "C:\Windows\system32\pihole.home+3-key.pem" "C:\Users\<username>\Desktop\homelab.key"
+```
+
+```
+sudo cp /mnt/c/Users/<username>/Desktop/homelab.crt /etc/ssl/homelab/homelab.crt
+sudo cp /mnt/c/Users/<username>/Desktop/homelab.key /etc/ssl/homelab/homelab.key
+sudo chmod 644 /etc/ssl/homelab/homelab.crt
+sudo chmod 600 /etc/ssl/homelab/homelab.key
+sudo service nginx reload
+```
+
+### Services Available Over HTTPS
+| Service | HTTPS URL |
+|---|---|
+| Pi-hole | `https://pihole.home:8443/admin` |
+| Grafana | `https://grafana.home:3443` |
