@@ -1,13 +1,13 @@
-# Computer Networking & Enterprise Security Home Lab
+# Computer Networking & Enterprise Security Project
 ## Author: Shengwei Zhu
 
 *Please refer to the changelog in CHANGELOG.md for the latest updates.*
 
 ## Projects
-### WSL2 Infrastructure Lab
-A self-hosted stack running on Windows Subsystem for Linux (WSL2) featuring DNS filtering, reverse proxying, monitoring, cloud storage, and VPN.
+### WSL2 Infrastructure
+A self-hosted stack running on Windows Subsystem for Linux (WSL2) featuring DNS filtering, reverse proxying, monitoring, cloud storage, and a VPN tunnel. 
 
-#### Requirements and Environment
+#### Tools and Techologies
 - Windows 10/11 with WSL2 enabled
 - WSL installed on your Windows system
 - Ubuntu 24.04 LTS or similar installed (I installed mine from the Microsoft Store)
@@ -29,15 +29,23 @@ A boot script (`scripts/update-wsl-ip.sh`) runs on every WSL launch and:
 - Sets Windows DNS to point to Pi-hole
 - Starts all services automatically
 ---
-### Proxmox Virtualization Lab
-A dedicated home lab server running Proxmox VE on a Beelink Mini S13 mini PC, hosting a Windows Active Directory environment and SIEM stack.
+### Enterprise Virtualization
+A dedicated Proxmox virtual environment running on a Beelink Mini S13 mini PC acting as a physical server, hosting a corporate enterprise environment featuring various virtual machines(VM) used to host Windows Server 2022, Windows 10 Pro, and Ubuntu Linux. 
+- The Windows Server 2022 VM acts as Domain Controller(DC) with Active Directory(AD) configured.
+- The Windows 10 Pro VM acts as workstation joined to the AD domain.
+- The Ubuntu Linux VM acts as an internal server that hosts services including Apache2, MarieDB, Nextcloud, GLPI, and Elastic.
+- The Router VM has pfSense installed, which will host the open source firewall.
+- Winlogbeat installed on the DC VM and is used to centralize ingested logs from Elastic.
+- Nextcloud is installed mainly for personal storage.
+- The Kibana dashboard will be used for alert monitoring and log review.
+- GLPI will be the ticketing system managed by IT/tech support.
 
-#### Requirements
+#### Tools and Technologies
 - Beelink Mini S13 (Intel N150, 16GB RAM, 500GB NVMe)
 - Proxmox VE 8.4 or higher
 - Windows Server 2022 Datacenter evaluation ISO
 - Ubuntu Server 24.04 LTS ISO
-- Cat6 ethernet connection to router (10ft or longer)
+- Cat6 ethernet connection to router
 
 #### Stack
 | Service | Purpose | Host |
@@ -54,6 +62,7 @@ A dedicated home lab server running Proxmox VE on a Beelink Mini S13 mini PC, ho
 | MariaDB | Nextcloud database | Ubuntu VM - :3306 |
 | Apache2 | Web server for Nextcloud | Ubuntu VM - :8081 |
 | GLPI | IT Service Management | Ubuntu VM - :8082 |
+| pfSense | Firewall | Router VM |
 
 #### Active Directory Structure
 - 7 Organizational Units: Executive, IT, HR, Finance, Marketing, Operations, Sales
@@ -97,14 +106,11 @@ Active Directory provisioning automated via PowerShell scripts:
 - Windows Server evaluation ISO and activation key are downloaded and retreived from Azure Dev Tools through Oregon State University
 
 ## Resouces
-### WSL2 Lab
 - [Pi-hole Documentation](https://github.com/pi-hole/docs)
 - [Nginx Beginner's Guide](https://nginx.org/en/docs/beginners_guide.html)
 - [Grafana + Prometheus Getting Started](https://grafana.com/docs/grafana/latest/fundamentals/getting-started/first-dashboards/get-started-grafana-prometheus/)
 - [Wireguard Quick Start](https://www.wireguard.com/quickstart/)
 - [Nextcloud User Manual](https://docs.nextcloud.com/server/stable/user_manual/en/)
-
-### Proxmox Lab
 - [Proxmox VE Documentation](https://pve.proxmox.com/wiki/Main_Page)
 - [Active Directory DS Installation](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/install-active-directory-domain-services)
 - [Elastic/Kibana Documentation](https://www.elastic.co/guide/index.html)
