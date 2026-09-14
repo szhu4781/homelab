@@ -1,4 +1,9 @@
 # Changelog
+## 2026-09-13
+- pfSense has been installed via Proxmox
+- Added pfSense to the stack
+- Updated phrasing and add more details to README.md
+
 ## 2026-07-10
 - Updated documentation for WSL setup to include instructions for setting up mkcert and HTTPS for Pihole and Grafana
 - The updated configuration files for setting up HTTPS on Pihole and Grafana have also been updated. See **/configs/nginx/grafana.conf and /configs/nginx/pihole.conf**
