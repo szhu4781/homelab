@@ -1,7 +1,7 @@
 # GLPI Setup Guide
 ### This setup involves GLPI version 10.0.17
 
-## Prerequisites
+## Requirements
 - Ubuntu Server 24.04 VM (existing Nextcloud VM reused)
 - Apache2 and MariaDB already installed (from Nextcloud setup)
 - Available RAM: ~256-512MB
