@@ -7,13 +7,13 @@ This guide contains a step-by-step deployment of a resource-optimized, secure El
 * **Log Pipeline:** Windows Security Event Logs -> Winlogbeat -> Elasticsearch (Port 9200) -> Kibana (Port 5601)
 
 ### 1. Optimize Linux Kernel Memory
-Elasticsearch requires a memory map count that exceeds Linux defaults. Increase this limit permanently on the Ubuntu VM:
+Increase memory limit for Ubuntu VM:
 ```
 sudo sysctl -w vm.max_map_count=262144
 echo "vm.max_map_count=262144" | sudo tee -a /etc/sysctl.conf
 ```
 ### 2. Configure `docker-compose.yml`
-Create a project directory `~/elastic-siem` and deploy the following environment configuration. This setup implements a **Lean Mode** architecture, strictly capping Java Virtual Machine (JVM) heap space and container limits to preserve host system resources:
+Create a project directory `~/elastic-siem` and deploy the following environment configuration:
 ```yaml
 services:
   elasticsearch:
