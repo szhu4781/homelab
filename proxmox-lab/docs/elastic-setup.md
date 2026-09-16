@@ -1,5 +1,4 @@
 # Elastic SIEM Deployment & Active Directory Monitoring Setup
-This guide contains a step-by-step deployment of a resource-optimized, secure Elastic SIEM cluster inside an Ubuntu Server VM on Proxmox VE, configured to ingest and alert on telemetry from a Windows Server Active Directory Domain Controller.
 
 ## Stack
 * **Elastic Host VM:** Ubuntu Server 24.04 LTS (4GB RAM, 2 Cores)
