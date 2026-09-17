@@ -1,6 +1,6 @@
-# Proxmox Virtualization Lab Setup
+# Proxmox Virtual Environment Setup
 
-## Prerequisites
+## Requirements
 - Beelink Mini S13 (or equivalent mini PC with 16GB RAM, 500GB NVMe)
 - Proxmox VE 9.2 ISO flashed to USB drive (use Rufus or Balena Etcher)
 - Windows Server 2022 Datacenter ISO
@@ -19,8 +19,8 @@
 6. Set a strong root password and email
 7. Configure network:
    - Hostname: `proxmox.home`
-   - IP Address: `10.0.0.200` (IP within the same subnet range as router)
-   - Gateway: `10.0.0.1` (IP of your router)
+   - IP Address: `10.0.0.X` (IP within the same subnet range as router)
+   - Gateway: `10.0.0.X` (IP of your router)
    - DNS: `8.8.8.8` (can set to Google's public DNS)
 8. Complete install and reboot, remove USB when prompted
 9. Access the web UI on your browser at `https://10.0.0.200:8006`
@@ -36,7 +36,8 @@
    - virtio-win ISO
 
 ## 3. Create Windows Server 2022 VM (Domain Controller)
-### VM Settings
+### VM Settings 
+Specs should be adjusted based on system requirement
 | Setting | Value |
 |---|---|
 | Name | server-dc |
@@ -62,10 +63,10 @@
 1. Open **Network & Internet Settings > Change adapter options**
 2. Right-click adapter > **Properties > IPv4 > Properties**
 3. Set:
-   - IP: `10.0.0.201` (Set this to an IP within the range of your gateway)
-   - Subnet: `255.255.255.0`
-   - Gateway: `10.0.0.1`
-   - DNS: `127.0.0.1` (points to itself after AD DS promotion)
+   - IP: `10.0.0.X` (Set this to an IP within the range of your gateway)
+   - Subnet: `255.255.255.X`
+   - Gateway: `10.0.0.X`
+   - DNS: `127.0.0.X` (points to itself after AD DS promotion)
 4. Disable IPv6 on the adapter to avoid DNS conflicts
 
 ## 5. Install Active Directory Domain Services
@@ -74,7 +75,7 @@
 3. Complete installation
 4. Click the notification flag → **Promote this server to a domain controller**
 5. Select **Add a new forest**
-6. Root domain name: `<DOMAIN_NAME>`
+6. Enter a root domain name with a extension
 7. Set DSRM password
 8. Accept DNS delegation warning
 9. Complete promotion and reboot
@@ -115,10 +116,10 @@ See `proxmox-lab/docs/gpo-list.md` for GPO configuration details.
 | Qemu Agent | Enabled |
 
 ### Join to Domain
-1. Set DNS to `10.0.0.201` (Domain Controller IP)
+1. Set DNS to the IP of the domain controller
 2. Disable IPv6 on the network adapter
 3. Go to **System Properties > Change > Domain**
-4. Enter `<DOMAIN_NAME>` (name of your domain)
+4. Enter the name of the domain you want to join to
 5. Authenticate with domain admin credentials
 6. Reboot the VM
 
