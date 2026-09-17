@@ -7,33 +7,35 @@
 - Ubuntu Server 24.04 LTS ISO
 - VirtIO driver ISO (virtio-win-0.1.285 or later)
 - Cat6 ethernet cable connected to your router
-- USB keyboard and HDMI display for initial Proxmox install only
+- USB keyboard and HDMI monitor for initial Proxmox install only
+- HDMI cable for initial install only
 ---
 
 ## 1. Install Proxmox VE
-1. Boot the mini PC from the Proxmox USB installer (spam F7 on Beelink to get boot menu)
-2. Select **Install Proxmox VE (Graphical)**
-3. Accept the EULA
-4. Select the internal NVMe SSD as the target disk
-5. Set your country, timezone, and keyboard layout
-6. Set a strong root password and email
-7. Configure network:
+1. Connect the USB drive with the flashed ISO and HDMI cable from the mini PC to a HDMI monitor
+2. Boot up the mini PC from the Proxmox USB installer (spam F7 on Beelink to get boot menu)
+3. Select **Install Proxmox VE (Graphical)**
+4. Accept the EULA
+5. Select the internal NVMe SSD as the target disk
+6. Set your country, timezone, and keyboard layout to your preference
+7. Set a strong root password and email
+8. Configure network:
    - Hostname: `proxmox.home`
    - IP Address: `10.0.0.X` (IP within the same subnet range as router)
    - Gateway: `10.0.0.X` (IP of your router)
    - DNS: `8.8.8.8` (can set to Google's public DNS)
-8. Complete install and reboot, remove USB when prompted
-9. Access the web UI on your browser at `https://10.0.0.X:<PROXMOX_PORT>`
+9. Complete install, reboot, and remove USB when prompted
+10. Access the web UI on your browser at `https://10.0.0.X:<PROXMOX_PORT>`
 **Note: The URL address will be different depending on what you set your IP address to during installation.**
 
 ## 2. Upload ISOs to Proxmox
-1. Log into Proxmox web UI
-2. Go to **Datacenter > proxmox > local storage > ISO Images**
+1. Log into Proxmox web UI with the credentials you set during installation
+2. Go to **Datacenter > proxmox > local (proxmox) > ISO Images**
 3. Upload:
-   - Windows Server 2022 Datacenter ISO
-   - Windows 10 ISO
-   - Ubuntu Server 24.04 LTS ISO
-   - virtio-win ISO
+   - Windows Server 2022 Datacenter ISO (for Windows Server 2022 VM)
+   - Windows 10 ISO (for Windows 10 VM)
+   - Ubuntu Server 24.04 LTS ISO (for Linux server VM)
+   - virtio-win ISO (for Windows driver)
 
 ## 3. Create Windows Server 2022 VM (Domain Controller)
 ### VM Settings 
@@ -54,7 +56,7 @@ Specs should be adjusted based on system requirement
 | TPM | v2.0 |
 
 ### Installation Notes
-- When installer shows no disks, click **Load Driver** → browse virtio CD → `vioscsi\2k22\amd64`
+- When installer shows no disks, click **Load Driver** > browse virtio CD > `vioscsi\2k22\amd64`
 - Install VirtIO network driver from `NetKVM\2k22\amd64` after OS install
 - Run `virtio-win-guest-tools.exe` from the VirtIO CD after install
 - Activate with your Windows Server Datacenter product key when prompte
@@ -70,15 +72,15 @@ Specs should be adjusted based on system requirement
 4. Disable IPv6 on the adapter to avoid DNS conflicts
 
 ## 5. Install Active Directory Domain Services
-1. Open **Server Manager → Add Roles and Features**
+1. Open **Server Manager > Add Roles and Features** on the Windows Server VM
 2. Select **Active Directory Domain Services** and **DNS Server**
-3. Complete installation
-4. Click the notification flag → **Promote this server to a domain controller**
+3. Keep clicking **Next** until **Install** appears. Install Active Directory.
+4. Click the notification flag at the top > **Promote this server to a domain controller**
 5. Select **Add a new forest**
 6. Enter a root domain name with a extension
 7. Set DSRM password
 8. Accept DNS delegation warning
-9. Complete promotion and reboot
+9. Complete promotion and reboot the machine
 **Note: You can choose whatever name you want for domain. Examples of name extension includes but not limited to: .local, .home, lab, .corp, etc.**
 
 ## 6. Provision Active Directory via PowerShell
@@ -116,12 +118,17 @@ See `proxmox-lab/docs/gpo-list.md` for GPO configuration details.
 | Qemu Agent | Enabled |
 
 ### Join to Domain
-1. Set DNS to the IP of the domain controller
-2. Disable IPv6 on the network adapter
-3. Go to **System Properties > Change > Domain**
-4. Enter the name of the domain you want to join to
-5. Authenticate with domain admin credentials
-6. Reboot the VM
+1. Open up Control Panel on the Windows 10 VM, **go to Network and Sharing Center > Change adapter settings**
+2. Click on the WiFi tied to your gateway address to open **WiFi Status**
+3. Open up Properties, look for **Internet Protocol Version 4 (TCP/IPv4)** and click it
+4. Set the Preferred DNS Server to the IP of the domain controller. Alternate DNS Server can be set to 8.8.8.8.
+5. Check the **Validate settings upon exit** box and click OK to save and close the settings
+6. Back in Properties, uncheck the **Internet Protocol Version 6 (IPv6)** option. Close everything once finished.
+7. Open up Run, type sysdm.cpl, and click OK to open up System Properties
+8. Click the **Computer Name** tab and click **Change** to open up the **Computer Name/Domain Changes**
+9. After the popup opens, under the Member of: section, input the name of your domain in the Domain field
+10. Click OK to apply the changes and it will prompt you to enter the domain admin credentials
+12. Enter the domain admin credentials and restart the VM
 
 ## 8. Create Ubuntu Server VM (Nextcloud + SIEM)
 ### VM Settings
@@ -147,7 +154,7 @@ cd homelab/ansible
 ansible-playbook -i inventory.ini homelab.yml --tags "common,nextcloud"
 ```
 
-## 9. Deploy Elasticsearch and Kibana (Docker)
+## Deploy Elasticsearch and Kibana (Docker)
 ### Install Docker
 ```
 sudo apt install docker.io docker-compose -y
