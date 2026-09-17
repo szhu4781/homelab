@@ -1,4 +1,9 @@
 # Changelog
+## 2026-09-16
+- Started documentation and setup on pfSense in a new file **proxmox-lab/docs/pfsense-setup.md**
+- Revised wording and phrasing for README.md and /proxmox-lab/docs/setup.md to include more details
+- Minor changes to /proxmox-lab/docs/glpi-setup.md and /proxmox-lab/docs/elastic-setup.md
+
 ## 2026-09-13
 - pfSense has been installed via Proxmox
 - Added pfSense to the stack
