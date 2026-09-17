@@ -23,7 +23,7 @@
    - Gateway: `10.0.0.X` (IP of your router)
    - DNS: `8.8.8.8` (can set to Google's public DNS)
 8. Complete install and reboot, remove USB when prompted
-9. Access the web UI on your browser at `https://10.0.0.200:8006`
+9. Access the web UI on your browser at `https://10.0.0.X:<PROXMOX_PORT>`
 **Note: The URL address will be different depending on what you set your IP address to during installation.**
 
 ## 2. Upload ISOs to Proxmox
