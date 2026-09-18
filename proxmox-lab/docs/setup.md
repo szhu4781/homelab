@@ -134,7 +134,7 @@ See `proxmox-lab/docs/gpo-list.md` for GPO configuration details.
 ### VM Settings
 | Setting | Value |
 |---|---|
-| Name | nextcloud-server |
+| Name | ubuntu-server |
 | OS Type | Linux 6.x kernel |
 | Machine | i440fx (default) |
 | BIOS | SeaBIOS |
