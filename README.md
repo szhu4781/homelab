@@ -3,7 +3,6 @@
 
 *Please refer to the changelog in CHANGELOG.md for the latest updates.*
 
-## Projects
 ### WSL2 Infrastructure
 A self-hosted stack running on Windows Subsystem for Linux (WSL2) featuring DNS filtering, reverse proxying, monitoring, cloud storage, and a VPN tunnel. 
 
