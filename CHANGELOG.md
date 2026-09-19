@@ -1,4 +1,8 @@
 # Changelog
+## 2026-09-18
+- Finished writing documentation for setting up pfSense
+- Minor change to README.md
+
 ## 2026-09-16
 - Started documentation and setup on pfSense in a new file **proxmox-lab/docs/pfsense-setup.md**
 - Revised wording and phrasing for README.md and /proxmox-lab/docs/setup.md to include more details
