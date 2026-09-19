@@ -2,6 +2,7 @@
 ## 2026-09-18
 - Finished writing documentation for setting up pfSense
 - Minor change to README.md
+- Updated architecture diagram to include pfSense and home router
 
 ## 2026-09-16
 - Started documentation and setup on pfSense in a new file **proxmox-lab/docs/pfsense-setup.md**
