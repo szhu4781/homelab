@@ -104,7 +104,7 @@ Active Directory provisioning automated via PowerShell scripts:
 - Private keys are excluded via `.gitignore`
 - Windows Server evaluation ISO and activation key are downloaded and retreived from Azure Dev Tools through Oregon State University
 
-## Resouces
+## Resources
 - [Pi-hole Documentation](https://github.com/pi-hole/docs)
 - [Nginx Beginner's Guide](https://nginx.org/en/docs/beginners_guide.html)
 - [Grafana + Prometheus Getting Started](https://grafana.com/docs/grafana/latest/fundamentals/getting-started/first-dashboards/get-started-grafana-prometheus/)
